@@ -33,8 +33,7 @@ enum Type {
 }
 impl Type {
     fn cmp(a: &Type, b: &Type) -> Ordering {
-        let order = [Type::HIGH, Type::ONE, Type::TWO, Type::THREE, Type::FULL, Type::FOUR, Type::FIVE];
-        return (order.iter().position(|x| x == a)).cmp(&order.iter().position(|x| x == b));
+        return (TYPE_ORDER.iter().position(|x| x == a)).cmp(&TYPE_ORDER.iter().position(|x| x == b));
     }
 }
 
@@ -44,6 +43,10 @@ struct Hand {
     bid: i32,
     typ: Type,
 }
+
+const TYPE_ORDER: [Type; 7] = [Type::HIGH, Type::ONE, Type::TWO, Type::THREE, Type::FULL, Type::FOUR, Type::FIVE];
+const CHAR_ORDER: [char; 14] = ['J','2','3','4','5','6','7','8','9','T','J','Q','K','A'];
+
 
 impl Hand {
     pub fn new(input: String) -> Hand {
@@ -92,8 +95,7 @@ impl Hand {
     }
 
     fn cmp_chars(a: char, b: char) -> Ordering {
-        let order = ['J','2','3','4','5','6','7','8','9','T','J','Q','K','A'];
-        return (order.iter().position(|&x| x == a)).cmp(&order.iter().position(|&x| x == b));
+        return (CHAR_ORDER.iter().position(|&x| x == a)).cmp(&CHAR_ORDER.iter().position(|&x| x == b));
     }
 
     pub fn cmp(&self, other: &Hand) ->Ordering {
